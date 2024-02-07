@@ -22,6 +22,7 @@ namespace GraphSubscriber
         private static readonly string ClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
         private static readonly string TenantId = Environment.GetEnvironmentVariable("TenantId");
         private static readonly string NotificationUrl = Environment.GetEnvironmentVariable("NotificationUrl");
+        private static readonly string[] scopes = new[] { "https://graph.microsoft.com/.default" };
 
         public MailboxSubscription(ICacheService cacheService)
         {
@@ -73,8 +74,6 @@ namespace GraphSubscriber
 
             SubscriptionDefinition request = JsonConvert.DeserializeObject<SubscriptionDefinition>(content);
 
-            var scopes = new[] { "https://graph.microsoft.com/.default" };
-
             var clientSecretCredential = new ClientSecretCredential(TenantId, ClientId, ClientSecret);
 
             var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
@@ -100,8 +99,6 @@ namespace GraphSubscriber
           [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "DeleteMailboxSubscription/{id}")] HttpRequest req,
           ILogger log, string id)
         {
-            var scopes = new[] { "https://graph.microsoft.com/.default" };
-
             var clientSecretCredential = new ClientSecretCredential(TenantId, ClientId, ClientSecret);
 
             var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
@@ -116,6 +113,20 @@ namespace GraphSubscriber
             }
 
             return new OkResult();
+        }
+
+        [FunctionName("GetAllMailboxSubscription")]
+        public async Task<IActionResult> GetAllMailboxSubscription(
+          [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
+          ILogger log)
+        {
+            var clientSecretCredential = new ClientSecretCredential(TenantId, ClientId, ClientSecret);
+
+            var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
+
+            var result = await graphClient.Subscriptions.GetAsync();
+
+            return new OkObjectResult(result);
         }
     }    
 }

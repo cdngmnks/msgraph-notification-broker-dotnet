@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphNotificationBroker", "GraphNotificationBroker\GraphNotificationBroker.csproj", "{D670D166-8AAD-4EA2-8859-3ECDA51B7CCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphNotificationBroker", "GraphNotificationBroker\GraphNotificationBroker.csproj", "{D670D166-8AAD-4EA2-8859-3ECDA51B7CCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphSubscriber", "GraphSubscriber\GraphSubscriber.csproj", "{FDAA87A7-5E8F-4D18-B898-5A5993121E95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D670D166-8AAD-4EA2-8859-3ECDA51B7CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D670D166-8AAD-4EA2-8859-3ECDA51B7CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D670D166-8AAD-4EA2-8859-3ECDA51B7CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDAA87A7-5E8F-4D18-B898-5A5993121E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDAA87A7-5E8F-4D18-B898-5A5993121E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDAA87A7-5E8F-4D18-B898-5A5993121E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDAA87A7-5E8F-4D18-B898-5A5993121E95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

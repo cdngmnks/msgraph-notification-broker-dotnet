@@ -1,13 +1,10 @@
 {
     "IsEncrypted": false,
-    "Values": {
-      "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-      "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-      "EventHubConnectionAppSetting": "connection string that you can copy from access policy from your event hub",
-      "ClientId": "copy from the app registration in azure from the Application (client) id",
-      "ClientSecret": "copy from the client secret(certificates and secrets) that you created in app registration in azure",
-      "TenantId": "Dns of the tenant",
-      "NotificationUrl": "EventHub:https://{nameofyourkeyvault}.vault.azure.net/secrets/{hubconnection}?tenantId={tennant dns}",
-      "Resource": "users/{userId}/mailFolders('Inbox')/messages"
-    }
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "EventHubConnectionAppSetting": "connection string that you can copy from access policy from your event hub",
+    "QueueConnectionString": "connecting string to the azure queue"
+
+  }
 }

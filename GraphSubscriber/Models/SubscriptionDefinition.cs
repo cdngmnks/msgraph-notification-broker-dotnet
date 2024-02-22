@@ -7,5 +7,6 @@ namespace GraphSubscriber.Models
         public string Resource { get; set; }
         public string ChangeType { get; set; }
         public DateTimeOffset ExpirationDateTime { get; set; }
+        public string LifecycleNotificationUrl { get; set; }
     }
 }

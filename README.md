@@ -3,12 +3,13 @@ This is a proof of concept for Microsoft Graph Notification Broker with function
 
 The base idea in this proof of concept is to subscribe on receiving outlook messages and renew the subscription every day automatically without the need of user interaction.
 
-To do this we need 4 things:
+To do this we need 6 things:
 1. Create an event hub resource and an event hub service insde.
 2. Create a key vault that that will contain the connection to our event hub service.
 3. Create a app registration.
 4. Create azure cache for redis
-5. Create a function app to handle subscription and receiving messages.
+5. Create a function app to handle subscription and one for receiving messages.
+6. Create a queue in the storage account of the function
 
 ## Create an event hub
 Create an event hub resource and inside create event hub. In the Shared Access Policy add a new policy and copy the connection string for later.
@@ -30,6 +31,9 @@ Create an azure cache for redis service on azure. Go to the Authentication tab a
 
 ## Create the function app
 In this solution we have two separated, function apps. One is for managing the subscription (create, renew and delete the subscription) and one is for receiving the messages from the event hub. To connect to the event hub all we need is to use EventHubTrigger function and set the connection string that we copied from the event hub as a connection string in this event hub. If we want to use EventHubTrigger we need to install Microsoft.Azure.WebJobs.Extensions.EventHubs package. For the other functions app we need a TimerTrigger function which acts like a cron job that makes a subscription renewal. To use this TimerTrigger we need to install the Microsoft.Azure.WebJobs.Extensions package. There are few things that we need here we need the link from the keyvault that we created to send to MicrosoftGraph as a NotificationUrl, also we need the secret key that we created in the app registration for the client authentication part. Also we need the client id and the tenant id that we can get from the azure portal, and finnaly our redis connection string to use the azure cache. The details for how to connect, add and delete cache entry are in the Services folder. In our function app we only use these methods to add, read or delete a chache entry which in our case is a subscription. 
+
+## Create a queue
+This queue is used to store the request that the event hub sends in a time when the other function app is down. When the function app for handeling subscription is up, the queue trigger will receive all the requests and handle them properly.
 
 ## References
 - [Microsoft Documentation](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-event-hubs?tabs=change-notifications-eventhubs-azure-cli%2Chttp#using-azure-event-hubs-to-receive-change-notifications/).
